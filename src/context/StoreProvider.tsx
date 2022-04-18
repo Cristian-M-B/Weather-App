@@ -2,7 +2,8 @@ import { createContext, useContext, useReducer } from "react";
 import StoreReducer, { actionsTypes, State } from "./StoreReducer";
 
 const initialState: State = {
-    cities: []
+    cities: [],
+    darkMode: false,
 }
 
 type StateContextProps = {

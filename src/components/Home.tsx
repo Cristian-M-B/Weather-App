@@ -1,17 +1,31 @@
-import React from 'react';
 import { useStore } from '../context/StoreProvider';
+import CityCard from './CityCard';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    home: {
+        backgroundColor: theme.palette.primary.dark,
+        paddingTop: '3vh',
+        paddingBottom: '3vh',
+        minHeight: '84vh',
+    },
+}))
 
 export default function Home(): JSX.Element {
     const { cities } = useStore();
+    const classes = useStyles();
     return (
-        <div>
-            {cities?.map((city, index) =>{
-                return <div key={index}>
-                    <p>{city.id}</p>
-                    <p>{city.name}</p>
-                    <img src={`http://openweathermap.org/img/wn/${city.image}@2x.png`} alt='Not Found'/>
-                </div>
+        <Grid
+            container
+            direction='row'
+            justifyContent='center'
+            alignItems='center'
+            className={classes.home}
+        >
+            {cities?.map(city => {
+                return <CityCard key={city.id} city={city} />
             })}
-        </div>
+        </Grid>
     )
 }

@@ -3,6 +3,7 @@ import { useDispatch, useStore } from './context/StoreProvider';
 import { actionsList } from './context/StoreReducer';
 import Nav from './components/Nav';
 import Home from './components/Home';
+import Footer from './components/Footer';
 import { ThemeProvider } from '@material-ui/styles';
 import { lightTheme, darkTheme } from './theme';
 
@@ -18,6 +19,7 @@ export default function App(): JSX.Element {
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Nav />
       <Home />
+      <Footer />
     </ThemeProvider>
   )
 }

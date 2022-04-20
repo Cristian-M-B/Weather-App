@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     home: {
-        backgroundColor: theme.palette.primary.dark,
+        backgroundColor: theme.palette.primary.main,
         paddingTop: '3vh',
         paddingBottom: '3vh',
         minHeight: '84vh',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { OutlinedInput, InputAdornment, IconButton } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
@@ -11,7 +11,7 @@ import { City } from '../interfaces/interfaces';
 const useStyles = makeStyles((theme) => ({
     input: {
         backgroundColor: 'white',
-        width: '30vw'
+        width: '30vw',
     },
     '@media (max-width: 600px)': {
         input: {
@@ -41,6 +41,9 @@ export default function SearchBar(): JSX.Element {
             let newCity: City = {
                 id: response.data.id,
                 name: response.data.name,
+                country: response.data.sys.country,
+                min: Math.round(response.data.main.temp_min),
+                max: Math.round(response.data.main.temp_max),
                 image: response.data.weather[0].icon
             }
             dispatch({ type: actionsList.ADD_CITY, payload: newCity })

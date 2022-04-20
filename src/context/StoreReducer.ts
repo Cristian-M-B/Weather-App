@@ -21,26 +21,28 @@ export type actionsTypes =
 export default function StoreReducer(state: State, action: actionsTypes): State {
     switch (action.type) {
         case actionsList.GET_LOCAL_STORAGE:
-            let getCities = localStorage.getItem('cities')
-            let citiesParse = typeof getCities === 'string' ? JSON.parse(getCities) : state.cities
+            let getState = localStorage.getItem('weather')
+            let stateParse = typeof getState === 'string' ? JSON.parse(getState) : state
             return {
                 ...state,
-                cities: citiesParse
+                cities: stateParse.cities,
+                darkMode: stateParse.darkMode
             }
         case actionsList.ADD_CITY:
             let repet = state.cities.find((city) => city.id === action.payload.id)
-            !repet && localStorage.setItem('cities', JSON.stringify([...state.cities, action.payload]));
+            !repet && localStorage.setItem('weather', JSON.stringify({...state, cities:[...state.cities, action.payload]}));
             return {
                 ...state,
                 cities: repet ? state.cities : [...state.cities, action.payload]
             }
         case actionsList.REMOVE_CITY:
-            localStorage.setItem('cities', JSON.stringify(state.cities.filter((city) => city.id !== action.payload)))
+            localStorage.setItem('weather', JSON.stringify({...state, cities: state.cities.filter((city) => city.id !== action.payload)}))
             return {
                 ...state,
                 cities: state.cities.filter((city) => city.id !== action.payload)
             }
         case actionsList.CHANGE_MODE:
+            localStorage.setItem('weather', JSON.stringify({...state, darkMode: !state.darkMode}));
             return {
                 ...state,
                 darkMode: !state.darkMode
